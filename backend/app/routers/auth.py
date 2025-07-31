@@ -85,8 +85,8 @@ def set_user_domains(
             # Кастомный домен
             custom_name = domain.replace("custom:", "").strip()
             if len(custom_name) < 2 or len(custom_name) > 50:
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST,
+                raise HTTPException(
+                    status_code=status.HTTP_400_BAD_REQUEST,
                     detail="Custom domain name must be between 2 and 50 characters"
                 )
             normalized_domains.append(custom_name)
