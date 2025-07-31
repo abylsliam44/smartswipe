@@ -1,0 +1,30 @@
+services:
+  - type: web
+    name: smartswipe-backend
+    env: python
+    region: frankfurt
+    buildCommand: pip install --upgrade pip && pip install -r requirements.txt
+    startCommand: uvicorn backend.app.main:app --host 0.0.0.0 --port $PORT
+    plan: free
+    branch: main
+    rootDir: .
+    envVars:
+      - key: ENVIRONMENT
+        value: production
+      - key: PYTHONPATH
+        value: /opt/render/project/src
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: SECRET_KEY
+        generateValue: true
+      - key: ALGORITHM
+        value: HS256
+      - key: ACCESS_TOKEN_EXPIRE_MINUTES
+        value: 60
+
+databases:
+  - name: smartswipe-db
+    databaseName: smartswipe_prod
+    user: smartswipe_user
+    plan: free
+    region: frankfurt 

@@ -1,0 +1,27 @@
+name: Keep Render Service Alive
+
+on:
+  schedule:
+    - cron: '*/14 * * * *'
+  workflow_dispatch:
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping SmartSwipe Backend
+        run: |
+          echo "Пингуем бэкенд..."
+          response=$(curl -s -o /dev/null -w "%{http_code}" https://smartswipe-backend.onrender.com/health)
+          echo "HTTP Status: $response"
+          
+          if [ $response -eq 200 ]; then
+            echo "✅ Сервис работает!"
+          else
+            echo "⚠️ Сервис недоступен (код: $response)"
+          fi
+          
+      - name: Ping with retry
+        run: |
+          sleep 30
+          curl -f https://smartswipe-backend.onrender.com/health || echo "Сервис все еще запускается" 
