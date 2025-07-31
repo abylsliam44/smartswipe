@@ -1,7 +1,7 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 import Cookies from 'js-cookie'
-import { authAPI } from '../lib/api'
+import { authAPI } from '../lib/api.js'
 
 const useAuthStore = create(
   persist(
