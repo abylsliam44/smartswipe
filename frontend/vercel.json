@@ -6,7 +6,7 @@
   "routes": [
     {
       "src": "/api/(.*)",
-      "dest": "https://smartswipe-backend.onrender.com/$1",
+      "dest": "https://smartswipe-5hrt.onrender.com/$1",
       "headers": {
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
