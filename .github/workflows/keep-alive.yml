@@ -12,7 +12,7 @@ jobs:
       - name: Ping SmartSwipe Backend
         run: |
           echo "Пингуем бэкенд..."
-          response=$(curl -s -o /dev/null -w "%{http_code}" https://smartswipe-5hrt.onrender.com/health)
+          response=$(curl -s -o /dev/null -w "%{http_code}" https://smartswipe-5hrt.onrender.com/api/health)
           echo "HTTP Status: $response"
           
           if [ $response -eq 200 ]; then
@@ -24,4 +24,4 @@ jobs:
       - name: Ping with retry
         run: |
           sleep 30
-          curl -f https://smartswipe-5hrt.onrender.com/health || echo "Сервис все еще запускается" 
+          curl -f https://smartswipe-5hrt.onrender.com/api/health || echo "Сервис все еще запускается" 

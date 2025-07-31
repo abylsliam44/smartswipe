@@ -18,12 +18,12 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Подключаем роутеры
-app.include_router(auth.router, prefix="/auth", tags=["auth"])
-app.include_router(ideas.router, prefix="/ideas", tags=["ideas"])
-app.include_router(swipes.router, prefix="/swipes", tags=["swipes"])
-app.include_router(ml.router, prefix="/ml", tags=["ml"])
-app.include_router(recommendations.router, prefix="/recommendations", tags=["recommendations"])
+# Подключаем роутеры с /api префиксом
+app.include_router(auth.router, prefix="/api/auth", tags=["auth"])
+app.include_router(ideas.router, prefix="/api/ideas", tags=["ideas"])
+app.include_router(swipes.router, prefix="/api/swipes", tags=["swipes"])
+app.include_router(ml.router, prefix="/api/ml", tags=["ml"])
+app.include_router(recommendations.router, prefix="/api/recommendations", tags=["recommendations"])
 
 
 @app.get("/")
@@ -49,6 +49,6 @@ def read_root():
     }
 
 
-@app.get("/health")
+@app.get("/api/health")
 def health_check():
     return {"status": "healthy", "version": "2.0.0"} 
