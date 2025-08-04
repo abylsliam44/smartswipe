@@ -21,7 +21,7 @@ class Settings(BaseSettings):
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 60 * 24 * 7  # 7 days
     
     # CORS Settings
-    CORS_ORIGINS: str = "http://localhost:3000,http://localhost:5173,https://smartswipe-ml-app.vercel.app,https://smartswipe.vercel.app"
+    CORS_ORIGINS: str = "http://localhost:3000,http://localhost:5173,https://smart-swipe-ml-app.vercel.app,https://smart-swipe.vercel.app"
     
     class Config:
         env_file = ".env"
