@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from .routers import auth, ideas, swipes, ml, recommendations
+from .config import get_settings
 
 app = FastAPI(
     title="SmartSwipe API",
@@ -10,11 +11,17 @@ app = FastAPI(
 )
 
 # CORS настройки
+settings = get_settings()
+cors_origins = [origin.strip() for origin in settings.CORS_ORIGINS.split(",")]
+
+# Логируем CORS настройки для отладки
+print(f"CORS Origins: {cors_origins}")
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # В продакшене указать конкретные домены
+    allow_origins=cors_origins,
     allow_credentials=True,
-    allow_methods=["*"],
+    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allow_headers=["*"],
 )
 
@@ -51,4 +58,12 @@ def read_root():
 
 @app.get("/api/health")
 def health_check():
-    return {"status": "healthy", "version": "2.0.0"} 
+    return {"status": "healthy", "version": "2.0.0"}
+
+@app.get("/api/test-cors")
+def test_cors():
+    return {
+        "message": "CORS test successful",
+        "cors_origins": settings.CORS_ORIGINS,
+        "timestamp": "2025-01-27T12:00:00Z"
+    } 
