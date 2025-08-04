@@ -22,7 +22,7 @@ services:
       - key: ACCESS_TOKEN_EXPIRE_MINUTES
         value: 60
       - key: CORS_ORIGINS
-        value: https://smartswipe-ml.vercel.app
+        value: https://*.vercel.app
 
 databases:
   - name: smartswipe-db

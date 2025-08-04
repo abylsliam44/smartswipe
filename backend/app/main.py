@@ -12,18 +12,26 @@ app = FastAPI(
 
 # CORS настройки
 settings = get_settings()
-cors_origins = [origin.strip() for origin in settings.CORS_ORIGINS.split(",")]
 
-# Логируем CORS настройки для отладки
-print(f"CORS Origins: {cors_origins}")
-
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=cors_origins,
-    allow_credentials=True,
-    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-    allow_headers=["*"],
-)
+# В продакшене разрешаем все домены для Vercel
+if settings.ENVIRONMENT == "production":
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=["*"],  # Разрешаем все домены в продакшене
+        allow_credentials=False,  # Безопасно для wildcard origins
+        allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+        allow_headers=["*"],
+    )
+else:
+    # В разработке используем конкретные домены
+    cors_origins = [origin.strip() for origin in settings.CORS_ORIGINS.split(",")]
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=cors_origins,
+        allow_credentials=True,
+        allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+        allow_headers=["*"],
+    )
 
 # Подключаем роутеры с /api префиксом
 app.include_router(auth.router, prefix="/api/auth", tags=["auth"])
