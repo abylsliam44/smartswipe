@@ -15,7 +15,7 @@ app = FastAPI(
 #   • credentials=True – токен передаётся в Authorization-header
 app.add_middleware(
     CORSMiddleware,
-    allow_origin_regex=r"https://.*\.vercel\.app",
+    allow_origin_regex=r"https://[-a-zA-Z0-9]+\.vercel\.app$",
     allow_origins=[
         "http://localhost:3000",
         "http://localhost:5173",
@@ -24,6 +24,18 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# ---- ensure tables exist (fallback when Alembic not executed) ----
+from .database import Base, engine
+
+
+@app.on_event("startup")
+def _create_tables_if_missing():
+    try:
+        Base.metadata.create_all(bind=engine)
+        print("[DB] create_all executed on startup")
+    except Exception as exc:
+        print(f"[DB] create_all failed: {exc}")
 
 # Подключаем роутеры с /api префиксом
 app.include_router(auth.router, prefix="/api/auth", tags=["auth"])
