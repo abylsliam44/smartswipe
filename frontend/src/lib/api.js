@@ -189,7 +189,8 @@ export const profileAPI = {
   },
 
   getUserStats: async () => {
-    const response = await api.get('/api/profile/stats')
+    // backend route implemented under ideas router
+    const response = await api.get('/api/ideas/stats')
     return response.data
   },
 

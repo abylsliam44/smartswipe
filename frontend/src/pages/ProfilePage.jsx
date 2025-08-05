@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Star, TrendingUp, Calendar, Lightbulb, Settings, Edit } from 'lucide-react'
 import useAuthStore from '../store/authStore'
+import { profileAPI } from '../lib/api'
 
 const ProfilePage = () => {
   const navigate = useNavigate()
@@ -16,19 +17,28 @@ const ProfilePage = () => {
   })
 
   useEffect(() => {
-    // Load saved ideas from localStorage
+    // Load saved ideas from localStorage (placeholder until backend endpoint ready)
     const saved = localStorage.getItem('savedIdeas')
     if (saved) {
       setSavedIdeas(JSON.parse(saved))
     }
 
-    // Mock user stats
-    setUserStats({
-      totalSwipes: 45,
-      totalLikes: 12,
-      totalIdeas: savedIdeas.length,
-      cyclesCompleted: 3
-    })
+    // Fetch real statistics from backend
+    const loadStats = async () => {
+      try {
+        const stats = await profileAPI.getUserStats()
+        setUserStats({
+          totalSwipes: stats.swiped ?? stats.total_available ?? 0,
+          totalLikes: stats.liked ?? 0,
+          totalIdeas: savedIdeas.length,
+          cyclesCompleted: stats.cycles_completed ?? 0
+        })
+      } catch (err) {
+        console.error('Failed to load user stats', err)
+      }
+    }
+
+    loadStats()
   }, [savedIdeas.length])
 
   const getDomainIcon = (domain) => {
