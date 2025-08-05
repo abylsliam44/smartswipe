@@ -17,10 +17,11 @@ settings = get_settings()
 
 client = None
 # Используем обычный OpenAI API
-if settings.OPENAI_API_KEY:
+if settings.OPENAI_API_KEY and settings.OPENAI_API_KEY.get_secret_value():
     client = AsyncOpenAI(api_key=settings.OPENAI_API_KEY.get_secret_value())
 else:
-    raise RuntimeError("OpenAI API key is not configured")
+    print("⚠️ OpenAI API key not configured – using local dummy idea generator")
+    client = None
 
 
 def _extract_json(text: str) -> str:
@@ -34,8 +35,17 @@ def _extract_json(text: str) -> str:
 async def _generate_ideas_for_domain(domain: str, count: int = 10) -> List[IdeaCreate]:
     """Генерирует идеи для конкретного домена через OpenAI"""
     
+    # Если нет OpenAI клиента, возвращаем заглушки
     if not client:
-        raise RuntimeError("OpenAI API key is not configured")
+        ideas: List[IdeaCreate] = []
+        for i in range(count):
+            ideas.append(IdeaCreate(
+                title=f"{domain} Idea #{i+1}",
+                description=f"Dummy description for {domain} idea #{i+1}",
+                tags=[domain.lower(), "demo"],
+                domain=domain
+            ))
+        return ideas
     
     # Настройки промптов для разных доменов
     domain_prompts = {
@@ -153,4 +163,19 @@ async def generate_ideas_for_domains(db_session, domains: List[str], ideas_per_d
 
 def run_sync_generation(db_session, domains: List[str], ideas_per_domain: int = 10):
     """Синхронная обёртка для использования в BackgroundTasks"""
-    return asyncio.run(generate_ideas_for_domains(db_session, domains, ideas_per_domain)) 
+    return asyncio.run(generate_ideas_for_domains(db_session, domains, ideas_per_domain))
+
+
+# ------------------- Helper for FastAPI BackgroundTasks (async) -------------------
+def enqueue_async_generation(db_session, domains: List[str], ideas_per_domain: int = 10):
+    """Функция передаётся в BackgroundTasks: внутри создаёт задачу в текущем event-loop,
+    поэтому не блокирует поток и остаётся асинхронной."""
+
+    try:
+        loop = asyncio.get_event_loop()
+    except RuntimeError:
+        # Если вызвана из потока без цикла, создаём новый
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
+
+    loop.create_task(generate_ideas_for_domains(db_session, domains, ideas_per_domain)) 

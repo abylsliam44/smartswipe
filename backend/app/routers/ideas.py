@@ -8,7 +8,8 @@ from ..crud.idea import get_ideas_for_user, mark_idea_as_viewed, get_user_unseen
 from ..database import get_db
 from ..dependencies import get_current_user
 from ..models import User
-from ..tasks.idea_generator import generate_ideas_for_domains
+# асинхронная постановка задачи без блокировки
+from ..tasks.idea_generator import enqueue_async_generation
 
 router = APIRouter()
 
@@ -33,12 +34,12 @@ async def generate_idea_pool(
             detail="User must complete onboarding first"
         )
     
-    # Запускаем генерацию в фоне
+    # Планируем генерацию: внутри создаётся asyncio.create_task
     background_tasks.add_task(
-        generate_ideas_for_domains,
+        enqueue_async_generation,
         db_session=db,
         domains=current_user.selected_domains,
-        ideas_per_domain=10
+        ideas_per_domain=10,
     )
     
     return {
