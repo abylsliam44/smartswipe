@@ -19,4 +19,14 @@ def get_db() -> Generator:
     try:
         yield db
     finally:
-        db.close() 
+        db.close()
+
+# Автоматически создаём таблицы при первом запуске, если Alembic ещё не применён
+# Это безопасно: create_all создаёт только отсутствующие объекты и не трогает существующие
+from . import models  # noqa: E402 — регистрирует все ORM-модели
+
+try:
+    Base.metadata.create_all(bind=engine)
+except Exception as exc:
+    # Логируем, но не останавливаем приложение — Render покажет в логах
+    print(f"[DB] create_all failed: {exc}") 
