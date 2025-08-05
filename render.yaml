@@ -21,8 +21,7 @@ services:
         value: HS256
       - key: ACCESS_TOKEN_EXPIRE_MINUTES
         value: 60
-      - key: CORS_ORIGINS
-        value: https://*.vercel.app
+
 
 databases:
   - name: smartswipe-db
