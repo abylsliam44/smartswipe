@@ -57,6 +57,6 @@ def health_check():
 def test_cors():
     return {
         "message": "CORS test successful",
-        "cors_origins": settings.CORS_ORIGINS,
+        "cors_origins": "All domains allowed (*)",
         "timestamp": "2025-01-27T12:00:00Z"
     } 
