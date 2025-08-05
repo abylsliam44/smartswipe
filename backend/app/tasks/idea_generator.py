@@ -12,6 +12,7 @@ import asyncio
 from ..config import get_settings
 from ..schemas.idea import IdeaCreate
 from ..crud.idea import bulk_create_ideas
+from ..database import SessionLocal
 
 settings = get_settings()
 
@@ -167,15 +168,23 @@ def run_sync_generation(db_session, domains: List[str], ideas_per_domain: int = 
 
 
 # ------------------- Helper for FastAPI BackgroundTasks (async) -------------------
-def enqueue_async_generation(db_session, domains: List[str], ideas_per_domain: int = 10):
-    """Функция передаётся в BackgroundTasks: внутри создаёт задачу в текущем event-loop,
-    поэтому не блокирует поток и остаётся асинхронной."""
+def enqueue_async_generation(db_session_dummy, domains: List[str], ideas_per_domain: int = 10):
+    """Кладётся в BackgroundTasks. Создаёт свой SessionLocal, чтобы не зависеть
+    от request-scope сессии (которая будет закрыта после ответа)."""
+
+    # Создаём новый DB-сеанс специально для фоновой задачи
+    bg_session = SessionLocal()
+
+    async def _runner():
+        try:
+            await generate_ideas_for_domains(bg_session, domains, ideas_per_domain)
+        finally:
+            bg_session.close()
 
     try:
         loop = asyncio.get_event_loop()
     except RuntimeError:
-        # Если вызвана из потока без цикла, создаём новый
         loop = asyncio.new_event_loop()
         asyncio.set_event_loop(loop)
 
-    loop.create_task(generate_ideas_for_domains(db_session, domains, ideas_per_domain)) 
+    loop.create_task(_runner()) 
