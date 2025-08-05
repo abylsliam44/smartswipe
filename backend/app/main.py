@@ -9,10 +9,17 @@ app = FastAPI(
     version="2.0.0"
 )
 
-# CORS настройки - ПРАВИЛЬНОЕ РЕШЕНИЕ
+# CORS настройки – универсальное решение
+#   • Любой домен вида *.vercel.app (preview-URL от Vercel)
+#   • Локальная разработка localhost:3000/5173
+#   • credentials=True – токен передаётся в Authorization-header
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://swipely.vercel.app", "http://localhost:3000", "http://localhost:5173"],
+    allow_origin_regex=r"https://.*\.vercel\.app",
+    allow_origins=[
+        "http://localhost:3000",
+        "http://localhost:5173",
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
