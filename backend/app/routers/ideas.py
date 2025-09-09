@@ -9,7 +9,7 @@ from ..database import get_db
 from ..dependencies import get_current_user
 from ..models import User
 # асинхронная постановка задачи без блокировки
-from ..tasks.idea_generator import enqueue_async_generation
+from ..tasks.idea_generator import run_sync_generation
 
 router = APIRouter()
 
@@ -34,9 +34,9 @@ async def generate_idea_pool(
             detail="User must complete onboarding first"
         )
     
-    # Планируем генерацию: внутри создаётся asyncio.create_task
+    # Планируем генерацию: используем синхронную версию
     background_tasks.add_task(
-        enqueue_async_generation,
+        run_sync_generation,
         db_session=db,
         domains=current_user.selected_domains,
         ideas_per_domain=10,
@@ -66,6 +66,18 @@ def get_game_session(
     
     # Получаем непросмотренные идеи из доменов пользователя
     ideas = get_user_unseen_ideas(db, current_user.id, current_user.selected_domains, limit)
+    
+    # Если идей мало, автоматически генерируем новые
+    if len(ideas) < limit // 2:  # Если меньше половины от запрошенного
+        # Запускаем генерацию в фоне
+        run_sync_generation(
+            db_session=db,
+            domains=current_user.selected_domains,
+            ideas_per_domain=5,  # Генерируем по 5 идей на домен
+        )
+        
+        # Пытаемся получить больше идей после генерации
+        ideas = get_user_unseen_ideas(db, current_user.id, current_user.selected_domains, limit)
     
     if not ideas:
         return GameSession(

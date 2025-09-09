@@ -175,16 +175,14 @@ def enqueue_async_generation(db_session_dummy, domains: List[str], ideas_per_dom
     # Создаём новый DB-сеанс специально для фоновой задачи
     bg_session = SessionLocal()
 
-    async def _runner():
+    def _runner():
         try:
-            await generate_ideas_for_domains(bg_session, domains, ideas_per_domain)
+            asyncio.run(generate_ideas_for_domains(bg_session, domains, ideas_per_domain))
         finally:
             bg_session.close()
 
-    try:
-        loop = asyncio.get_event_loop()
-    except RuntimeError:
-        loop = asyncio.new_event_loop()
-        asyncio.set_event_loop(loop)
-
-    loop.create_task(_runner()) 
+    # Запускаем в отдельном потоке
+    import threading
+    thread = threading.Thread(target=_runner)
+    thread.daemon = True
+    thread.start() 

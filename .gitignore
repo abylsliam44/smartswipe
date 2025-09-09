@@ -139,3 +139,19 @@ local_settings.py
 
 # Cursor rules
 .cursor/
+.cursorrules
+
+# ML Models directory
+backend/ml_models/
+
+# Frontend build artifacts
+frontend/dist/
+frontend/build/
+
+# Test files
+test_*.py
+*_test.py
+
+# Temporary development files
+*.dev
+*.local

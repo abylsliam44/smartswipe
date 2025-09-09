@@ -26,8 +26,10 @@ services:
     image: postgres:15
     container_name: db
     restart: always
-    env_file:
-      - .env
+    environment:
+      - POSTGRES_DB=smartswipe_db
+      - POSTGRES_USER=smartswipe_user
+      - POSTGRES_PASSWORD=smartswipe_password
     ports:
       - "5432:5432"
     volumes:
