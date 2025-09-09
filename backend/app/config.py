@@ -8,7 +8,7 @@ class Settings(BaseSettings):
     ENVIRONMENT: str = "development"
     
     # Database
-    DATABASE_URL: str = "postgresql://user:password@localhost:5432/dbname"
+    DATABASE_URL: str = Field(default="postgresql://user:password@localhost:5432/dbname")
     
     # Azure OpenAI
     AZURE_OPENAI_API_KEY: SecretStr | None = None
