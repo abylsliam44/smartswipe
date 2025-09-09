@@ -1,13 +1,22 @@
 from typing import Generator
 
+import os
 from sqlalchemy import create_engine
 from sqlalchemy.orm import declarative_base, sessionmaker
 
-from .config import get_settings
 
-settings = get_settings()
+# Читаем URL базы данных из переменных окружения, чтобы совпадало с Alembic/Render
+DATABASE_URL = os.getenv("DATABASE_URL")
 
-engine = create_engine(settings.DATABASE_URL, pool_pre_ping=True)
+if not DATABASE_URL:
+    # Явная ошибка поможет быстрее диагностировать проблему конфигурации
+    raise RuntimeError("DATABASE_URL is not set")
+
+engine = create_engine(
+    DATABASE_URL,
+    pool_pre_ping=True,
+    future=True,
+)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 Base = declarative_base()
