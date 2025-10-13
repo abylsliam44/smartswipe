@@ -21,7 +21,7 @@ client = None
 if settings.OPENAI_API_KEY and settings.OPENAI_API_KEY.get_secret_value():
     client = AsyncOpenAI(api_key=settings.OPENAI_API_KEY.get_secret_value())
 else:
-    print("⚠️ OpenAI API key not configured – using local dummy idea generator")
+    print("⚠️ OpenAI API key not configured – idea generation is disabled (no dummies)")
     client = None
 
 
@@ -36,17 +36,9 @@ def _extract_json(text: str) -> str:
 async def _generate_ideas_for_domain(domain: str, count: int = 10) -> List[IdeaCreate]:
     """Генерирует идеи для конкретного домена через OpenAI"""
     
-    # Если нет OpenAI клиента, возвращаем заглушки
+    # Если нет OpenAI клиента, генерацию не выполняем (без заглушек)
     if not client:
-        ideas: List[IdeaCreate] = []
-        for i in range(count):
-            ideas.append(IdeaCreate(
-                title=f"{domain} Idea #{i+1}",
-                description=f"Dummy description for {domain} idea #{i+1}",
-                tags=[domain.lower(), "demo"],
-                domain=domain
-            ))
-        return ideas
+        return []
     
     # Настройки промптов для разных доменов
     domain_prompts = {
