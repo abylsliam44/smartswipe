@@ -21,7 +21,7 @@ client = None
 if settings.OPENAI_API_KEY and settings.OPENAI_API_KEY.get_secret_value():
     client = AsyncOpenAI(api_key=settings.OPENAI_API_KEY.get_secret_value())
 else:
-    print("⚠️ OpenAI API key not configured – idea generation is disabled (no dummies)")
+    print("⚠️ OpenAI API key not configured – idea generation is disabled")
     client = None
 
 
