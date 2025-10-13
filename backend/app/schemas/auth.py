@@ -1,11 +1,17 @@
 from uuid import UUID
 from typing import List, Optional
-from pydantic import BaseModel, EmailStr
+from pydantic import BaseModel, EmailStr, Field, validator
 
 
 class UserRegister(BaseModel):
     email: EmailStr
-    password: str
+    password: str = Field(..., min_length=6, max_length=72, description="Password must be between 6 and 72 characters")
+    
+    @validator('password')
+    def validate_password(cls, v):
+        if len(v) > 72:
+            raise ValueError('Password cannot be longer than 72 characters')
+        return v
 
 
 class UserRead(BaseModel):
