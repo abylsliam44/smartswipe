@@ -226,6 +226,21 @@ class AdvancedRecommender:
             print("❌ Недостаточно данных для ensemble модели")
             return
         
+        # Проверяем, что в выборке есть как минимум два класса (и лайки, и дизлайки)
+        unique_classes = np.unique(y)
+        if unique_classes.shape[0] < 2:
+            print("❌ Недостаточно классов для обучения (нужны и лайки, и дизлайки)")
+            # Сохраним пояснение в метриках, чтобы отдать его через /api/ml/metrics
+            self.training_metrics["ensemble"] = {
+                "error": "single_class",
+                "message": "Training requires at least two classes in swipe labels",
+                "positive_rate": float(y.mean()) if len(y) > 0 else 0.0,
+                "samples": int(len(y))
+            }
+            # Модель не обучаем
+            self.ensemble_model = None
+            return
+        
         # Разделяем данные
         X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
         
