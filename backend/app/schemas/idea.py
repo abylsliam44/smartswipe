@@ -28,6 +28,21 @@ class IdeaWithProbability(IdeaRead):
     confidence: str  # "high", "medium", "low"
 
 
+class FinalIdeaRequest(BaseModel):
+    top_ideas: List[IdeaRead]
+    questionnaire: dict
+
+
+class FinalIdeaResponse(IdeaBase):
+    id: str
+    personalizedFor: dict
+    confidence: int
+    aiReasoning: str
+    keyFeatures: List[str]
+    marketPotential: str
+    savedAt: Optional[str] = None
+
+
 class IdeaViewCreate(BaseModel):
     idea_id: UUID
 

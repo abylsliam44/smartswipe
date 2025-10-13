@@ -3,7 +3,7 @@ from sqlalchemy.orm import Session
 from typing import List
 import uuid
 
-from ..schemas.idea import IdeaRead, GameSession, IdeaViewCreate
+from ..schemas.idea import IdeaRead, GameSession, IdeaViewCreate, FinalIdeaRequest, FinalIdeaResponse
 from ..crud.idea import get_ideas_for_user, mark_idea_as_viewed, get_user_unseen_ideas
 from ..database import get_db
 from ..dependencies import get_current_user
@@ -167,3 +167,103 @@ def get_user_idea_stats(
         "remaining": remaining,
         "domains": current_user.selected_domains
     } 
+
+
+@router.post("/final", response_model=FinalIdeaResponse)
+def generate_final_idea(
+    payload: FinalIdeaRequest,
+    current_user: User = Depends(get_current_user)
+):
+    """Генерирует финальную идею на основе топ-3 и ответов квиза.
+    Под капотом пытается использовать OpenAI; если ключа нет, используется локальный фолбэк.
+    """
+    from ..tasks.idea_generator import client  # reuse configured OpenAI client
+    import random
+    import datetime
+    import json
+
+    if not payload.top_ideas:
+        raise HTTPException(status_code=400, detail="top_ideas is required")
+
+    # База: выбираем одну из топ-3 как каркас
+    base = payload.top_ideas[0]
+    if len(payload.top_ideas) > 1:
+        base = random.choice(payload.top_ideas[:3])
+
+    # Попытка GPT-персонализации
+    if client:
+        system_prompt = (
+            "Ты продукт-менеджер. На основе выбранных пользователем трёх идей и ответов мини-квиза "
+            "сгенерируй ОДНУ финальную идею: с коротким ярким title (<=60), ёмким description (<=220), "
+            "6 тегами, и кратким обоснованием почему это подходит пользователю. Верни ЧИСТЫЙ JSON с полями: "
+            "title, description, tags, aiReasoning, keyFeatures (список из 4-6), marketPotential (короткая строка)."
+        )
+
+        user_payload = {
+            "topIdeas": [i.model_dump() for i in payload.top_ideas[:3]],
+            "questionnaire": payload.questionnaire,
+            "baseIdeaHint": base.model_dump(),
+        }
+
+        user_prompt = (
+            "Сгенерируй персонализированную идею. Учитывай ответы пользователя. "
+            "Верни только JSON."
+        )
+
+        try:
+            resp = client.chat.completions.create(
+                model="gpt-4o",
+                messages=[
+                    {"role": "system", "content": system_prompt},
+                    {"role": "user", "content": json.dumps(user_payload, ensure_ascii=False)},
+                    {"role": "user", "content": user_prompt},
+                ],
+                temperature=0.8,
+                max_tokens=800,
+            )
+            content = resp.choices[0].message.content
+            try:
+                data = json.loads(content)
+            except Exception:
+                # В ответе могли быть тройные кавычки/кодблоки
+                import re
+                match = re.search(r"```json(.*?)```", content, re.S)
+                data = json.loads(match.group(1).strip()) if match else json.loads(content)
+
+            return FinalIdeaResponse(
+                id="final-ai-generated",
+                title=data.get("title", base.title),
+                description=data.get("description", base.description),
+                tags=data.get("tags", base.tags)[:6],
+                domain=base.domain,
+                personalizedFor=payload.questionnaire,
+                confidence=95,
+                aiReasoning=data.get("aiReasoning", "Personalized by GPT based on your answers"),
+                keyFeatures=data.get("keyFeatures", ["AI personalization", "Scalable architecture"]),
+                marketPotential=data.get("marketPotential", "High"),
+                savedAt=datetime.datetime.utcnow().isoformat() + "Z",
+            )
+        except Exception as e:
+            # Падать нельзя — используем фолбэк ниже
+            print(f"❌ GPT final idea error: {e}")
+
+    # Локальный фолбэк (без OpenAI)
+    combined_tags = list({t for i in payload.top_ideas for t in (i.tags or [])})
+    return FinalIdeaResponse(
+        id="final-fallback",
+        title=f"AI-Powered {base.title.split(' ')[-2:] and ' '.join(base.title.split(' ')[-2:])}",
+        description=f"A personalized solution combining your top choices. Uses {', '.join(combined_tags[:3])}.",
+        tags=combined_tags[:6] or base.tags,
+        domain=base.domain,
+        personalizedFor=payload.questionnaire,
+        confidence=90,
+        aiReasoning="Fallback: crafted locally from your top selections and answers.",
+        keyFeatures=[
+            "AI personalization",
+            "Insights from your top-3",
+            "Modern stack integration",
+            "Scalable architecture",
+        ],
+        marketPotential="High",
+        savedAt=datetime.datetime.utcnow().isoformat() + "Z",
+    )

@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { ideasAPI } from '../lib/api'
 import { Trophy, Star, Save, RefreshCw, Sparkles, Heart, Zap } from 'lucide-react'
 import confetti from 'canvas-confetti'
 
@@ -24,8 +25,8 @@ const FinalIdeaPage = () => {
       setTopIdeas(parsedTopIdeas)
       setQuestionnaire(parsedQuestionnaire)
       
-      // Генерируем финальную идею
-      generateFinalIdea(parsedTopIdeas, parsedQuestionnaire)
+      // Запрашиваем финальную идею у бэкенда (GPT под капотом)
+      fetchFinalIdea(parsedTopIdeas, parsedQuestionnaire)
     } else {
       // Если нет данных, возвращаемся к свайпам
       navigate('/swipe')
@@ -107,34 +108,33 @@ const FinalIdeaPage = () => {
     }, 600)
   }
 
-  const generateFinalIdea = (ideas, answers) => {
-    // Имитируем AI генерацию на основе топ-3 идей и ответов
-    const topIdea = ideas[0] // Золотая медаль
-    
-    // Комбинируем элементы из всех трех идей
-    const combinedTags = [...new Set(ideas.flatMap(idea => idea.tags || []))]
-    
-    // Создаем персонализированную идею
-    const personalizedIdea = {
-      id: 'final-ai-generated',
-      title: `AI-Powered ${topIdea.title.split(' ').slice(-2).join(' ')} Revolution`,
-      description: `A revolutionary platform that combines the best aspects of your top choices with cutting-edge AI technology. This innovative solution leverages ${combinedTags.slice(0, 3).join(', ')} to create an unprecedented user experience that addresses modern market demands while maintaining scalability and sustainability.`,
-      domain: topIdea.domain,
-      tags: combinedTags.slice(0, 6),
-      personalizedFor: answers,
-      confidence: 95,
-      aiReasoning: `Based on your preferences for ${answers.priority || 'innovation'} and interest in ${answers.budget || 'scalable solutions'}, this idea perfectly aligns with your entrepreneurial vision. It combines elements from your top 3 selections while addressing current market trends.`,
-      keyFeatures: [
-        `AI-powered ${topIdea.domain.toLowerCase()} analysis and optimization`,
-        'Personalized user experience with machine learning insights',
-        'Scalable architecture supporting rapid growth',
-        'Integration with modern tech stack and APIs'
-      ],
-      marketPotential: 'High - addresses a growing market with significant opportunity for disruption',
-      savedAt: new Date().toISOString()
+  const fetchFinalIdea = async (ideas, answers) => {
+    try {
+      const data = await ideasAPI.generateFinal(ideas, answers)
+      setFinalIdea(data)
+    } catch (e) {
+      // Фолбэк: локальная генерация, если бэкенд недоступен
+      const topIdea = ideas[0]
+      const combinedTags = [...new Set(ideas.flatMap(idea => idea.tags || []))]
+      setFinalIdea({
+        id: 'final-fallback',
+        title: `AI-Powered ${topIdea.title.split(' ').slice(-2).join(' ')} Revolution`,
+        description: `A personalized solution using ${combinedTags.slice(0, 3).join(', ')}.`,
+        domain: topIdea.domain,
+        tags: combinedTags.slice(0, 6),
+        personalizedFor: answers,
+        confidence: 90,
+        aiReasoning: 'Local fallback due to API error',
+        keyFeatures: [
+          `AI-powered ${topIdea.domain.toLowerCase()} analysis`,
+          'Personalized UX',
+          'Scalable architecture',
+          'API integrations'
+        ],
+        marketPotential: 'High',
+        savedAt: new Date().toISOString()
+      })
     }
-    
-    setFinalIdea(personalizedIdea)
   }
 
   const handleSaveToProfile = () => {

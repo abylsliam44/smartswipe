@@ -115,6 +115,14 @@ export const ideasAPI = {
     const response = await api.get('/api/ideas/stats')
     return response.data
   },
+
+  generateFinal: async (topIdeas, questionnaire) => {
+    const response = await api.post('/api/ideas/final', {
+      top_ideas: topIdeas,
+      questionnaire,
+    })
+    return response.data
+  },
 }
 
 // Swipes API
