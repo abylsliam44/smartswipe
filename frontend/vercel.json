@@ -9,7 +9,7 @@
       "destination": "https://smartswipe-5hrt.onrender.com/api/$1"
     },
     {
-      "source": "(/(.*))?",
+      "source": "/(.*)",
       "destination": "/index.html"
     }
   ],
