@@ -79,8 +79,8 @@ const ProfilePage = () => {
         transition={{ duration: 0.6 }}
       >
         <div className="text-center">
-          <h1 className="text-3xl font-bold text-white mb-2">Your Profile</h1>
-          <p className="text-white/70">Track your progress and saved ideas</p>
+          <h1 className="text-3xl font-bold text-blue-900 mb-2">Your Profile</h1>
+          <p className="text-blue-700">Track your progress and saved ideas</p>
         </div>
       </motion.header>
 
@@ -102,14 +102,14 @@ const ProfilePage = () => {
             <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-6 lg:space-y-0">
               {/* User Basic Info */}
               <div className="flex items-center space-x-6">
-                <div className="w-20 h-20 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center">
-                  <Star className="w-10 h-10 text-white" />
+                <div className="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center">
+                  <Star className="w-10 h-10 text-blue-700" />
                 </div>
                 <div>
-                  <h2 className="text-2xl font-bold text-white mb-2">
+                  <h2 className="text-2xl font-bold text-blue-900 mb-2">
                     {user?.email || 'User'}
                   </h2>
-                  <p className="text-white/70">
+                  <p className="text-blue-700">
                     Member since {new Date().toLocaleDateString()}
                   </p>
                 </div>
@@ -143,10 +143,10 @@ const ProfilePage = () => {
               transition={{ delay: 0.35 }}
             >
               <div className="flex items-center justify-between mb-4">
-                <h3 className="text-xl font-bold text-white">Your Interests</h3>
+                <h3 className="text-xl font-bold text-blue-900">Your Interests</h3>
                 <button
                   onClick={() => navigate('/profile/domains')}
-                  className="text-purple-400 hover:text-purple-300 text-sm flex items-center space-x-1"
+                  className="text-blue-600 hover:text-blue-700 text-sm flex items-center space-x-1"
                 >
                   <Edit className="w-4 h-4" />
                   <span>Edit</span>
@@ -156,7 +156,7 @@ const ProfilePage = () => {
                 {user.selected_domains.map((domain, index) => (
                   <motion.div
                     key={index}
-                    className="flex items-center space-x-2 bg-white/5 rounded-lg p-3"
+                    className="flex items-center space-x-2 bg-white border border-blue-100 rounded-lg p-3"
                     initial={{ opacity: 0, scale: 0.8 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ delay: 0.4 + index * 0.05 }}
@@ -164,7 +164,7 @@ const ProfilePage = () => {
                     <div className={`w-8 h-8 bg-gradient-to-r ${getDomainColor(domain)} rounded-lg flex items-center justify-center text-sm`}>
                       {getDomainIcon(domain)}
                     </div>
-                    <span className="text-white/80 text-sm font-medium">{domain}</span>
+                    <span className="text-blue-800 text-sm font-medium">{domain}</span>
                   </motion.div>
                 ))}
               </div>
@@ -179,9 +179,9 @@ const ProfilePage = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
             >
-              <TrendingUp className="w-8 h-8 text-purple-400 mx-auto mb-3" />
-              <div className="text-2xl font-bold text-white mb-1">{userStats.totalSwipes}</div>
-              <div className="text-white/70 text-sm">Total Swipes</div>
+              <TrendingUp className="w-8 h-8 text-blue-600 mx-auto mb-3" />
+              <div className="text-2xl font-bold text-blue-900 mb-1">{userStats.totalSwipes}</div>
+              <div className="text-blue-700 text-sm">Total Swipes</div>
             </motion.div>
 
             <motion.div 
@@ -190,9 +190,9 @@ const ProfilePage = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5 }}
             >
-              <Star className="w-8 h-8 text-yellow-400 mx-auto mb-3" />
-              <div className="text-2xl font-bold text-white mb-1">{userStats.totalLikes}</div>
-              <div className="text-white/70 text-sm">Ideas Liked</div>
+              <Star className="w-8 h-8 text-yellow-500 mx-auto mb-3" />
+              <div className="text-2xl font-bold text-blue-900 mb-1">{userStats.totalLikes}</div>
+              <div className="text-blue-700 text-sm">Ideas Liked</div>
             </motion.div>
 
             <motion.div 
@@ -201,9 +201,9 @@ const ProfilePage = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6 }}
             >
-              <Lightbulb className="w-8 h-8 text-blue-400 mx-auto mb-3" />
-              <div className="text-2xl font-bold text-white mb-1">{userStats.totalIdeas}</div>
-              <div className="text-white/70 text-sm">Saved Ideas</div>
+              <Lightbulb className="w-8 h-8 text-blue-600 mx-auto mb-3" />
+              <div className="text-2xl font-bold text-blue-900 mb-1">{userStats.totalIdeas}</div>
+              <div className="text-blue-700 text-sm">Saved Ideas</div>
             </motion.div>
 
             <motion.div 
@@ -212,9 +212,9 @@ const ProfilePage = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.7 }}
             >
-              <Calendar className="w-8 h-8 text-green-400 mx-auto mb-3" />
-              <div className="text-2xl font-bold text-white mb-1">{userStats.cyclesCompleted}</div>
-              <div className="text-white/70 text-sm">Cycles Completed</div>
+              <Calendar className="w-8 h-8 text-green-600 mx-auto mb-3" />
+              <div className="text-2xl font-bold text-blue-900 mb-1">{userStats.cyclesCompleted}</div>
+              <div className="text-blue-700 text-sm">Cycles Completed</div>
             </motion.div>
           </div>
 
@@ -225,7 +225,7 @@ const ProfilePage = () => {
             transition={{ delay: 0.8 }}
           >
             <div className="flex items-center justify-between mb-6">
-              <h3 className="text-2xl font-bold text-white">Saved Ideas</h3>
+              <h3 className="text-2xl font-bold text-blue-900">Saved Ideas</h3>
               <button
                 onClick={() => navigate('/swipe')}
                 className="btn-primary px-6 py-2"
@@ -236,9 +236,9 @@ const ProfilePage = () => {
 
             {savedIdeas.length === 0 ? (
               <div className="card p-12 text-center">
-                <Lightbulb className="w-16 h-16 text-white/30 mx-auto mb-4" />
-                <h4 className="text-xl font-bold text-white mb-2">No Saved Ideas Yet</h4>
-                <p className="text-white/70 mb-6">
+                <Lightbulb className="w-16 h-16 text-blue-300 mx-auto mb-4" />
+                <h4 className="text-xl font-bold text-blue-900 mb-2">No Saved Ideas Yet</h4>
+                <p className="text-blue-700 mb-6">
                   Start swiping to discover and save your favorite ideas!
                 </p>
                 <button
@@ -265,17 +265,17 @@ const ProfilePage = () => {
                     </div>
 
                     {/* Domain */}
-                    <div className="text-sm text-purple-400 mb-2">
+                    <div className="text-sm text-blue-600 mb-2">
                       {idea.domain}
                     </div>
 
                     {/* Title */}
-                    <h4 className="text-lg font-bold text-white mb-3">
+                    <h4 className="text-lg font-bold text-blue-900 mb-3">
                       {idea.title}
                     </h4>
 
                     {/* Description */}
-                    <p className="text-white/70 text-sm mb-4 line-clamp-3">
+                    <p className="text-blue-700 text-sm mb-4 line-clamp-3">
                       {idea.description}
                     </p>
 
@@ -284,7 +284,7 @@ const ProfilePage = () => {
                       {idea.tags?.slice(0, 3).map((tag, tagIndex) => (
                         <span
                           key={tagIndex}
-                          className="px-2 py-1 bg-white/10 rounded-full text-xs text-white/70"
+                          className="px-2 py-1 bg-blue-50 rounded-full text-xs text-blue-700"
                         >
                           {tag}
                         </span>
@@ -292,7 +292,7 @@ const ProfilePage = () => {
                     </div>
 
                     {/* Saved Date */}
-                    <div className="text-xs text-white/50">
+                    <div className="text-xs text-blue-600">
                       Saved {new Date(idea.savedAt).toLocaleDateString()}
                     </div>
                   </motion.div>

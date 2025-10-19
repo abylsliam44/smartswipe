@@ -206,8 +206,8 @@ const OnboardingPage = () => {
         transition={{ duration: 0.6 }}
       >
         <div className="text-center">
-          <h1 className="text-3xl font-bold text-white mb-2">Choose Your Interests</h1>
-          <p className="text-white/70">Select domains that interest you most</p>
+          <h1 className="text-3xl font-bold text-blue-900 mb-2">Choose Your Interests</h1>
+          <p className="text-blue-700">Select domains that interest you most</p>
         </div>
       </motion.header>
 
@@ -232,20 +232,20 @@ const OnboardingPage = () => {
 
           {/* Progress */}
           <div className="text-center mb-12">
-            <div className="w-full bg-white/10 rounded-full h-2 mb-4">
+            <div className="w-full bg-blue-50 rounded-full h-2 mb-4">
               <div 
-                className="bg-gradient-to-r from-purple-500 to-pink-500 h-2 rounded-full transition-all duration-300"
+                className="bg-gradient-to-r from-blue-600 to-sky-500 h-2 rounded-full transition-all duration-300"
                 style={{ width: `${(selectedDomains.length / 8) * 100}%` }}
               />
             </div>
-            <p className="text-white/70">
+            <p className="text-blue-700">
               Selected: {selectedDomains.length} of 8 domains (minimum 1 required)
             </p>
           </div>
 
           {/* Available Domains */}
           <div className="mb-8">
-            <h3 className="text-lg font-semibold text-white mb-6">
+            <h3 className="text-lg font-semibold text-blue-900 mb-6">
               Choose Your Domains ({allDomains.length} available)
             </h3>
             
@@ -255,8 +255,8 @@ const OnboardingPage = () => {
                   key={domain.id}
                   className={`card cursor-pointer transition-all duration-300 ${
                     selectedDomains.includes(domain.id) 
-                      ? 'ring-2 ring-purple-400 bg-purple-500/20' 
-                      : 'hover:ring-1 hover:ring-white/30 hover:bg-white/5'
+                      ? 'ring-2 ring-blue-400 bg-blue-50' 
+                      : 'hover:ring-1 hover:ring-blue-200'
                   }`}
                   onClick={() => handleDomainToggle(domain.id)}
                   initial={{ opacity: 0, y: 20 }}
@@ -270,8 +270,8 @@ const OnboardingPage = () => {
                       {domain.icon}
                     </div>
                     
-                    <h3 className="text-lg font-bold text-white mb-2">{domain.name}</h3>
-                    <p className="text-white/70 text-sm mb-4">{domain.description}</p>
+                    <h3 className="text-lg font-bold text-blue-900 mb-2">{domain.name}</h3>
+                    <p className="text-blue-700 text-sm mb-4">{domain.description}</p>
                     
                     {selectedDomains.includes(domain.id) && (
                       <motion.div
@@ -279,7 +279,7 @@ const OnboardingPage = () => {
                         animate={{ scale: 1 }}
                         transition={{ type: "spring", stiffness: 500, damping: 30 }}
                       >
-                        <CheckCircle className="w-6 h-6 text-purple-400 mx-auto" />
+                        <CheckCircle className="w-6 h-6 text-blue-600 mx-auto" />
                       </motion.div>
                     )}
                   </div>
@@ -296,18 +296,16 @@ const OnboardingPage = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1.2 }}
             >
-              <h3 className="text-lg font-semibold text-white mb-6 flex items-center">
-                <Sparkles className="w-5 h-5 text-yellow-400 mr-2" />
+              <h3 className="text-lg font-semibold text-blue-900 mb-6 flex items-center">
+                <Sparkles className="w-5 h-5 text-blue-600 mr-2" />
                 Or Create Your Own Domain
               </h3>
               
               {!showCustomForm ? (
                 <div className="card p-6 text-center">
-                  <div className="w-16 h-16 bg-gradient-to-r from-yellow-500 to-orange-500 rounded-2xl flex items-center justify-center mx-auto mb-4 text-2xl">
-                    ✨
-                  </div>
-                  <h3 className="text-lg font-bold text-white mb-2">Add Your Own Domain</h3>
-                  <p className="text-white/70 text-sm mb-4">
+                  <Sparkles className="w-8 h-8 text-blue-600 mx-auto mb-3" />
+                  <h3 className="text-lg font-bold text-blue-900 mb-2">Add Your Own Domain</h3>
+                  <p className="text-blue-700 text-sm mb-4">
                     Create a custom domain that reflects your unique interests
                   </p>
                   <button
@@ -320,14 +318,14 @@ const OnboardingPage = () => {
                 </div>
               ) : (
                 <div className="card p-6">
-                  <h3 className="text-lg font-bold text-white mb-4">Create Custom Domain</h3>
+                  <h3 className="text-lg font-bold text-blue-900 mb-4">Create Custom Domain</h3>
                   <div className="flex gap-4">
                     <input
                       type="text"
                       value={customDomainName}
                       onChange={(e) => setCustomDomainName(e.target.value)}
                       placeholder="Enter domain name (e.g., Crypto, Robotics, Travel)"
-                      className="flex-1 px-4 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                      className="flex-1 px-4 py-2 bg-white border border-blue-200 rounded-lg text-blue-900 placeholder-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
                       maxLength={50}
                     />
                     <button
@@ -347,7 +345,7 @@ const OnboardingPage = () => {
                       Cancel
                     </button>
                   </div>
-                  <p className="text-white/60 text-xs mt-2">
+                  <p className="text-blue-600 text-xs mt-2">
                     Domain name must be 2-50 characters
                   </p>
                 </div>
@@ -363,8 +361,8 @@ const OnboardingPage = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1.3 }}
             >
-              <h3 className="text-lg font-semibold text-white mb-4 flex items-center">
-                <CheckCircle className="w-5 h-5 text-green-400 mr-2" />
+              <h3 className="text-lg font-semibold text-blue-900 mb-4 flex items-center">
+                <CheckCircle className="w-5 h-5 text-blue-600 mr-2" />
                 Your Custom Domains
               </h3>
               
@@ -382,13 +380,9 @@ const OnboardingPage = () => {
                         transition={{ delay: 1.4 + index * 0.1 }}
                       >
                         <div className="text-center">
-                          <div className="w-16 h-16 bg-gradient-to-r from-yellow-500 to-orange-500 rounded-2xl flex items-center justify-center mx-auto mb-4 text-2xl relative">
-                            ✨
-                            <Sparkles className="w-4 h-4 text-yellow-300 absolute -top-1 -right-1" />
-                          </div>
-                          
-                          <h3 className="text-lg font-bold text-white mb-2">{name}</h3>
-                          <p className="text-yellow-400 text-xs mb-4">Custom Domain</p>
+                          <Sparkles className="w-8 h-8 text-blue-600 mx-auto mb-3" />
+                          <h3 className="text-lg font-bold text-blue-900 mb-2">{name}</h3>
+                          <p className="text-blue-600 text-xs mb-4">Custom Domain</p>
                           
                           <button
                             onClick={() => handleDomainToggle(customId)}
@@ -427,7 +421,7 @@ const OnboardingPage = () => {
             </button>
             
             {selectedDomains.length === 0 && (
-              <p className="text-white/60 text-sm mt-4">
+              <p className="text-blue-700 text-sm mt-4">
                 Please select at least one domain to continue
               </p>
             )}

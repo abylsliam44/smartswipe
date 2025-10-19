@@ -106,8 +106,8 @@ const QuestionnairePage = () => {
         transition={{ duration: 0.6 }}
       >
         <div className="text-center">
-          <h1 className="text-3xl font-bold text-white mb-2">Personalize Your Experience</h1>
-          <p className="text-white/70">Help us understand your preferences better</p>
+          <h1 className="text-3xl font-bold text-blue-900 mb-2">Personalize Your Experience</h1>
+          <p className="text-blue-700">Help us understand your preferences better</p>
         </div>
       </motion.header>
 
@@ -121,13 +121,13 @@ const QuestionnairePage = () => {
         >
           {/* Progress */}
           <div className="text-center mb-12">
-            <div className="w-full bg-white/10 rounded-full h-2 mb-4">
+            <div className="w-full bg-blue-50 rounded-full h-2 mb-4">
               <div 
-                className="bg-gradient-to-r from-purple-500 to-pink-500 h-2 rounded-full transition-all duration-300"
+                className="bg-gradient-to-r from-blue-600 to-sky-500 h-2 rounded-full transition-all duration-300"
                 style={{ width: `${((currentQuestion + 1) / questions.length) * 100}%` }}
               />
             </div>
-            <p className="text-white/70">
+            <p className="text-blue-700">
               Question {currentQuestion + 1} of {questions.length}
             </p>
           </div>
@@ -141,7 +141,7 @@ const QuestionnairePage = () => {
             exit={{ opacity: 0, x: -50 }}
             transition={{ duration: 0.3 }}
           >
-            <h2 className="text-2xl font-bold text-white mb-8 text-center">
+            <h2 className="text-2xl font-bold text-blue-900 mb-8 text-center">
               {currentQ.question}
             </h2>
 
@@ -152,8 +152,8 @@ const QuestionnairePage = () => {
                   onClick={() => handleAnswer(option)}
                   className={`w-full p-4 rounded-xl text-left transition-all duration-300 ${
                     answers[currentQ.id] === option
-                      ? 'bg-purple-500/20 border-2 border-purple-400 text-white'
-                      : 'bg-white/10 border-2 border-white/20 text-white/80 hover:bg-white/20 hover:border-white/30'
+                      ? 'bg-blue-50 border-2 border-blue-400 text-blue-900'
+                      : 'bg-white border-2 border-blue-200 text-blue-700 hover:bg-blue-50 hover:border-blue-300'
                   }`}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -190,7 +190,7 @@ const QuestionnairePage = () => {
           </div>
 
           {!hasAnswered && (
-            <p className="text-white/60 text-sm text-center mt-4">
+            <p className="text-blue-700 text-sm text-center mt-4">
               Please select an option to continue
             </p>
           )}

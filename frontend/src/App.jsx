@@ -30,8 +30,7 @@ function App() {
 
   return (
     <Router>
-      <div className="min-h-screen bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-900 flex flex-col">
-        <StarField />
+      <div className="min-h-screen bg-white flex flex-col">
         <Navbar />
         
         <div className="flex-1 flex flex-col pt-20">

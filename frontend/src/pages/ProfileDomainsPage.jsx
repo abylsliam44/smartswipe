@@ -177,13 +177,13 @@ const ProfileDomainsPage = () => {
           <div className="flex items-center space-x-4">
             <button
               onClick={() => navigate('/profile')}
-              className="text-white/60 hover:text-white/80 transition-colors"
+              className="text-blue-700 hover:text-blue-900 transition-colors"
             >
               <ArrowLeft className="w-6 h-6" />
             </button>
             <div>
-              <h1 className="text-3xl font-bold text-white">Manage Domains</h1>
-              <p className="text-white/70">Add or remove your interests</p>
+              <h1 className="text-3xl font-bold text-blue-900">Manage Domains</h1>
+              <p className="text-blue-700">Add or remove your interests</p>
             </div>
           </div>
         </div>
@@ -215,14 +215,14 @@ const ProfileDomainsPage = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
           >
-            <h2 className="text-2xl font-bold text-white mb-6 flex items-center">
-              <CheckCircle className="w-6 h-6 text-green-400 mr-3" />
+            <h2 className="text-2xl font-bold text-blue-900 mb-6 flex items-center">
+              <CheckCircle className="w-6 h-6 text-blue-600 mr-3" />
               Your Selected Domains ({selectedDomains.length}/8)
             </h2>
             
             {selectedDomains.length === 0 ? (
               <div className="card p-8 text-center">
-                <p className="text-white/70">No domains selected yet</p>
+                <p className="text-blue-700">No domains selected yet</p>
               </div>
             ) : (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -243,13 +243,13 @@ const ProfileDomainsPage = () => {
                         )}
                       </div>
                       
-                      <h3 className="text-lg font-bold text-white mb-2">
+                      <h3 className="text-lg font-bold text-blue-900 mb-2">
                         {domain.name}
                         {domain.is_custom && (
-                          <span className="text-xs text-yellow-400 block">Custom</span>
+                          <span className="text-xs text-blue-600 block">Custom</span>
                         )}
                       </h3>
-                      <p className="text-white/70 text-sm mb-4">{domain.description}</p>
+                      <p className="text-blue-700 text-sm mb-4">{domain.description}</p>
                       
                       {/* Remove button */}
                       {selectedDomains.length > 1 && (
@@ -276,8 +276,8 @@ const ProfileDomainsPage = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5 }}
             >
-              <h2 className="text-2xl font-bold text-white mb-6 flex items-center">
-                <Sparkles className="w-6 h-6 text-yellow-400 mr-3" />
+              <h2 className="text-2xl font-bold text-blue-900 mb-6 flex items-center">
+                <Sparkles className="w-6 h-6 text-blue-600 mr-3" />
                 Create Custom Domain
               </h2>
               
@@ -286,8 +286,8 @@ const ProfileDomainsPage = () => {
                   <div className="w-16 h-16 bg-gradient-to-r from-yellow-500 to-orange-500 rounded-2xl flex items-center justify-center mx-auto mb-4 text-2xl">
                     ✨
                   </div>
-                  <h3 className="text-lg font-bold text-white mb-2">Add Your Own Domain</h3>
-                  <p className="text-white/70 text-sm mb-4">
+                  <h3 className="text-lg font-bold text-blue-900 mb-2">Add Your Own Domain</h3>
+                  <p className="text-blue-700 text-sm mb-4">
                     Create a custom domain that reflects your unique interests
                   </p>
                   <button
@@ -299,14 +299,14 @@ const ProfileDomainsPage = () => {
                 </div>
               ) : (
                 <div className="card p-6">
-                  <h3 className="text-lg font-bold text-white mb-4">Create Custom Domain</h3>
+                  <h3 className="text-lg font-bold text-blue-900 mb-4">Create Custom Domain</h3>
                   <div className="flex gap-4">
                     <input
                       type="text"
                       value={customDomainName}
                       onChange={(e) => setCustomDomainName(e.target.value)}
                       placeholder="Enter domain name (e.g., Crypto, Robotics, Travel)"
-                      className="flex-1 px-4 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                      className="flex-1 px-4 py-2 bg-white border border-blue-200 rounded-lg text-blue-900 placeholder-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
                       maxLength={50}
                       disabled={isUpdating}
                     />
@@ -328,7 +328,7 @@ const ProfileDomainsPage = () => {
                       Cancel
                     </button>
                   </div>
-                  <p className="text-white/60 text-xs mt-2">
+                  <p className="text-blue-600 text-xs mt-2">
                     Domain name must be 2-50 characters
                   </p>
                 </div>
@@ -343,8 +343,8 @@ const ProfileDomainsPage = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6 }}
             >
-              <h2 className="text-2xl font-bold text-white mb-6 flex items-center">
-                <Plus className="w-6 h-6 text-blue-400 mr-3" />
+              <h2 className="text-2xl font-bold text-blue-900 mb-6 flex items-center">
+                <Plus className="w-6 h-6 text-blue-600 mr-3" />
                 Available Predefined Domains ({availableDomains.length})
               </h2>
               
@@ -352,7 +352,7 @@ const ProfileDomainsPage = () => {
                 {availableDomains.map((domain, index) => (
                   <motion.div
                     key={domain.id}
-                    className="card cursor-pointer hover:ring-2 hover:ring-purple-400 transition-all group"
+                    className="card cursor-pointer hover:ring-2 hover:ring-blue-300 transition-all group"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.7 + index * 0.1 }}
@@ -365,8 +365,8 @@ const ProfileDomainsPage = () => {
                         {getDomainIcon(domain.id)}
                       </div>
                       
-                      <h3 className="text-lg font-bold text-white mb-2">{domain.name}</h3>
-                      <p className="text-white/70 text-sm mb-4">{domain.description}</p>
+                      <h3 className="text-lg font-bold text-blue-900 mb-2">{domain.name}</h3>
+                      <p className="text-blue-700 text-sm mb-4">{domain.description}</p>
                       
                       {/* Add button */}
                       <div className="flex items-center justify-center">
@@ -389,12 +389,12 @@ const ProfileDomainsPage = () => {
             transition={{ delay: 0.9 }}
           >
             <div className="card p-6 max-w-2xl mx-auto">
-              <h3 className="text-lg font-bold text-white mb-3">Domain Management</h3>
-              <p className="text-white/70 text-sm mb-4">
+              <h3 className="text-lg font-bold text-blue-900 mb-3">Domain Management</h3>
+              <p className="text-blue-700 text-sm mb-4">
                 Your selected domains determine what types of startup ideas you'll see when swiping. 
                 You can have between 1-8 domains selected at any time, including custom domains.
               </p>
-              <p className="text-white/60 text-xs">
+              <p className="text-blue-600 text-xs">
                 Changes take effect immediately and will influence your next swipe session.
               </p>
             </div>

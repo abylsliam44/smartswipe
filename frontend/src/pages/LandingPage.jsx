@@ -39,33 +39,33 @@ const LandingPage = () => {
       >
         {/* Badge */}
         <motion.div
-          className="inline-flex items-center space-x-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-4 py-2 mb-8"
+          className="inline-flex items-center space-x-2 bg-blue-50 border border-blue-100 rounded-full px-4 py-2 mb-8"
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.2 }}
         >
-          <Sparkles className="w-4 h-4 text-purple-400" />
-          <span className="text-white/90 text-sm font-medium">AI-Powered Startup Discovery</span>
-          <Zap className="w-4 h-4 text-yellow-400" />
+          <Sparkles className="w-4 h-4 text-blue-600" />
+          <span className="text-blue-800 text-sm font-medium">AI-Powered Startup Discovery</span>
+          <Zap className="w-4 h-4 text-blue-600" />
         </motion.div>
 
         {/* Main Heading */}
         <motion.h1 
-          className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight"
+          className="text-4xl md:text-6xl lg:text-7xl font-bold text-blue-900 mb-6 leading-tight"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4 }}
         >
           Find Your Perfect
           <br />
-          <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent">
+          <span className="bg-gradient-to-r from-blue-700 to-sky-500 bg-clip-text text-transparent">
             Startup Idea
           </span>
         </motion.h1>
 
         {/* Subtitle */}
         <motion.p 
-          className="text-lg md:text-xl text-white/80 mb-12 max-w-2xl mx-auto leading-relaxed"
+          className="text-lg md:text-xl text-blue-700 mb-12 max-w-2xl mx-auto leading-relaxed"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6 }}
@@ -107,53 +107,25 @@ const LandingPage = () => {
           transition={{ delay: 1 }}
         >
           <div className="card p-6 text-center">
-            <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl flex items-center justify-center mx-auto mb-4">
-              <Zap className="w-6 h-6 text-white" />
-            </div>
-            <h3 className="text-lg font-semibold text-white mb-2">AI-Generated Ideas</h3>
-            <p className="text-white/70 text-sm">Discover unique startup concepts powered by advanced AI technology</p>
+            <Zap className="w-8 h-8 text-blue-600 mx-auto mb-3" />
+            <h3 className="text-lg font-semibold text-blue-900 mb-2">AI-Generated Ideas</h3>
+            <p className="text-blue-700 text-sm">Discover unique startup concepts powered by advanced AI technology</p>
           </div>
 
           <div className="card p-6 text-center">
-            <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-xl flex items-center justify-center mx-auto mb-4">
-              <Target className="w-6 h-6 text-white" />
-            </div>
-            <h3 className="text-lg font-semibold text-white mb-2">Personalized</h3>
-            <p className="text-white/70 text-sm">Get recommendations tailored to your interests and preferences</p>
+            <Target className="w-8 h-8 text-blue-600 mx-auto mb-3" />
+            <h3 className="text-lg font-semibold text-blue-900 mb-2">Personalized</h3>
+            <p className="text-blue-700 text-sm">Get recommendations tailored to your interests and preferences</p>
           </div>
 
           <div className="card p-6 text-center">
-            <div className="w-12 h-12 bg-gradient-to-r from-emerald-500 to-green-500 rounded-xl flex items-center justify-center mx-auto mb-4">
-              <Sparkles className="w-6 h-6 text-white" />
-            </div>
-            <h3 className="text-lg font-semibold text-white mb-2">Swipe to Discover</h3>
-            <p className="text-white/70 text-sm">Intuitive Tinder-like interface for exploring startup opportunities</p>
+            <Sparkles className="w-8 h-8 text-blue-600 mx-auto mb-3" />
+            <h3 className="text-lg font-semibold text-blue-900 mb-2">Swipe to Discover</h3>
+            <p className="text-blue-700 text-sm">Intuitive Tinder-like interface for exploring startup opportunities</p>
           </div>
         </motion.div>
       </motion.div>
-
-      {/* Floating Elements */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {[...Array(6)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute w-4 h-4 bg-gradient-to-r from-purple-400/30 to-pink-400/30 rounded-full"
-            initial={{ 
-              x: Math.random() * window.innerWidth, 
-              y: window.innerHeight + 50 
-            }}
-            animate={{ 
-              y: -50, 
-              x: Math.random() * window.innerWidth 
-            }}
-            transition={{ 
-              duration: Math.random() * 4 + 3, 
-              repeat: Infinity, 
-              delay: Math.random() * 3 
-            }}
-          />
-        ))}
-      </div>
+      {/* Убраны плавающие градиентные элементы для более строгого дизайна */}
     </div>
   )
 }

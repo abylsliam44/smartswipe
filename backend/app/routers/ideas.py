@@ -193,10 +193,10 @@ def generate_final_idea(
     # Попытка GPT-персонализации
     if client:
         system_prompt = (
-            "Ты продукт-менеджер. На основе выбранных пользователем трёх идей и ответов мини-квиза "
-            "сгенерируй ОДНУ финальную идею: с коротким ярким title (<=60), ёмким description (<=220), "
-            "6 тегами, и кратким обоснованием почему это подходит пользователю. Верни ЧИСТЫЙ JSON с полями: "
-            "title, description, tags, aiReasoning, keyFeatures (список из 4-6), marketPotential (короткая строка)."
+            "You are a product manager. Based on the user's top-3 ideas and mini-quiz answers, "
+            "generate ONE final idea: short catchy title (<=60), concise description (<=220), "
+            "6 tags, and short reasoning why it fits. Return PURE JSON with fields: "
+            "title, description, tags, aiReasoning, keyFeatures (4-6 items), marketPotential. All in English."
         )
 
         user_payload = {
@@ -206,8 +206,7 @@ def generate_final_idea(
         }
 
         user_prompt = (
-            "Сгенерируй персонализированную идею. Учитывай ответы пользователя. "
-            "Верни только JSON."
+            "Generate a personalized idea. Use the user's answers. Return JSON only."
         )
 
         try:

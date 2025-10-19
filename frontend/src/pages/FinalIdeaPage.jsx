@@ -237,7 +237,7 @@ const FinalIdeaPage = () => {
         {[...Array(20)].map((_, i) => (
           <motion.div
             key={i}
-            className="absolute w-2 h-2 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full"
+            className="absolute w-2 h-2 bg-blue-200 rounded-full"
             initial={{ 
               x: Math.random() * window.innerWidth, 
               y: window.innerHeight + 50,
@@ -309,7 +309,7 @@ const FinalIdeaPage = () => {
           {/* Main Idea Card */}
           <div className="card p-8 mb-8 relative overflow-hidden">
             {/* Animated Background Gradient */}
-            <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 via-pink-500/5 to-blue-500/5 animate-pulse" />
+            <div className="absolute inset-0 bg-blue-50" />
             
             <div className="relative z-10">
               {/* Domain Icon */}
@@ -317,18 +317,18 @@ const FinalIdeaPage = () => {
                 <div className={`w-20 h-20 bg-gradient-to-r ${getDomainColor(finalIdea.domain)} rounded-2xl flex items-center justify-center mx-auto mb-4 text-4xl`}>
                   {getDomainIcon(finalIdea.domain)}
                 </div>
-                <div className="text-purple-400 font-medium">
+                <div className="text-blue-600 font-medium">
                   {finalIdea.domain}
                 </div>
               </div>
 
               {/* Idea Title */}
-              <h1 className="text-4xl md:text-5xl font-bold text-white text-center mb-6 leading-tight">
+              <h1 className="text-4xl md:text-5xl font-bold text-blue-900 text-center mb-6 leading-tight">
                 {finalIdea.title}
               </h1>
 
               {/* Description */}
-              <p className="text-xl text-white/90 text-center mb-8 leading-relaxed max-w-3xl mx-auto">
+              <p className="text-xl text-blue-700 text-center mb-8 leading-relaxed max-w-3xl mx-auto">
                 {finalIdea.description}
               </p>
 
@@ -337,7 +337,7 @@ const FinalIdeaPage = () => {
                 {finalIdea.tags.map((tag, index) => (
                   <span
                     key={index}
-                    className="px-4 py-2 bg-gradient-to-r from-purple-500/20 to-pink-500/20 border border-purple-400/30 rounded-full text-purple-300 text-sm font-medium"
+                    className="px-4 py-2 bg-blue-50 border border-blue-200 rounded-full text-blue-700 text-sm font-medium"
                   >
                     {tag}
                   </span>

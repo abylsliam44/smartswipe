@@ -55,26 +55,26 @@ async def _generate_ideas_for_domain(domain: str, count: int = 10) -> List[IdeaC
     domain_context = domain_prompts.get(domain, f"сферы {domain}")
     
     system_prompt = f"""
-    Ты опытный предприниматель и продукт-менеджер. Генерируешь инновационные и реализуемые стартап-идеи в сфере {domain_context}.
+    You are an experienced product manager. Generate innovative yet feasible startup ideas in the domain of {domain_context}.
     
-    Требования к идеям:
-    - Реалистичные и выполнимые
-    - Решают реальную проблему
-    - Имеют четкую целевую аудиторию
-    - Монетизируемые
-    - Учитывают современные тренды
+    Requirements:
+    - Realistic and implementable
+    - Solve a clear problem
+    - Have a well-defined target audience
+    - Monetizable
+    - Reflect current trends
     
-    Верни результат в виде JSON-массива с полями: title, description, tags.
-    - title: краткое название (до 50 символов)
-    - description: описание проблемы и решения (до 200 символов)
-    - tags: 3-5 релевантных тегов
+    Return a pure JSON array with objects: title, description, tags.
+    - title: concise (<= 50 chars), English
+    - description: problem and solution summary (<= 200 chars), English
+    - tags: 3-5 relevant English tags
     """
     
     user_prompt = f"""
-    Сгенерируй {count} уникальных стартап-идей в сфере {domain_context}.
-    Каждая идея должна быть оригинальной и не повторять существующие решения.
+    Generate {count} unique startup ideas in {domain_context}.
+    Each idea must be original and not repeat existing solutions.
     
-    Верни чистый JSON-массив без дополнительных пояснений.
+    Return ONLY raw JSON array, no extra text.
     """
     
     try:
@@ -124,7 +124,6 @@ async def generate_ideas_for_domains(db_session, domains: List[str], ideas_per_d
             ideas = await _generate_ideas_for_domain(domain, ideas_per_domain)
             all_generated_ideas.extend(ideas)
             
-            # Небольшая пауза между запросами к OpenAI
             await asyncio.sleep(1)
             
         except Exception as e:

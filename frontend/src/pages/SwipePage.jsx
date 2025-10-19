@@ -488,17 +488,17 @@ const SwipePage = () => {
               </div>
 
               {/* Domain */}
-              <div className="text-center text-purple-400 text-sm mb-4">
+              <div className="text-center text-blue-600 text-sm mb-4">
                 {currentIdea.domain || 'General'}
               </div>
 
               {/* Title */}
-              <h2 className="text-2xl font-bold text-white text-center mb-6">
+              <h2 className="text-2xl font-bold text-blue-900 text-center mb-6">
                 {currentIdea.title}
               </h2>
 
               {/* Description */}
-              <p className="text-white/80 text-center mb-8 leading-relaxed">
+              <p className="text-blue-700 text-center mb-8 leading-relaxed">
                 {currentIdea.description}
               </p>
 
@@ -507,7 +507,7 @@ const SwipePage = () => {
                 {(currentIdea.tags || []).slice(0, 4).map((tag, index) => (
                   <span
                     key={index}
-                    className="px-3 py-1 bg-white/10 rounded-full text-sm text-white/70"
+                    className="px-3 py-1 bg-blue-50 rounded-full text-sm text-blue-700"
                   >
                     {tag}
                   </span>

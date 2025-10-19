@@ -205,7 +205,7 @@ const TopIdeasPage = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
             >
-              <h2 className="text-2xl font-bold text-white mb-6 text-center flex items-center justify-center">
+              <h2 className="text-2xl font-bold text-blue-900 mb-6 text-center flex items-center justify-center">
                 <Trophy className="w-8 h-8 text-yellow-400 mr-3" />
                 Your Top {selectedIdeas.length} Ideas
               </h2>
@@ -218,7 +218,7 @@ const TopIdeasPage = () => {
                   return (
                     <motion.div
                       key={idea.id}
-                      className={`card relative ${medal.bgColor} border-2 border-current ${medal.color}`}
+                    className={`card relative border-2 border-current ${medal.color}`}
                       initial={{ opacity: 0, y: 20, scale: 0.9 }}
                       animate={{ opacity: 1, y: 0, scale: 1 }}
                       transition={{ delay: 0.4 + index * 0.1, type: "spring" }}
@@ -233,7 +233,7 @@ const TopIdeasPage = () => {
 
                       {/* Position Number */}
                       <div className="absolute top-4 left-4">
-                        <div className={`w-8 h-8 ${medal.bgColor} rounded-full flex items-center justify-center text-sm font-bold ${medal.color}`}>
+                        <div className={`w-8 h-8 bg-blue-50 rounded-full flex items-center justify-center text-sm font-bold ${medal.color}`}>
                           {index + 1}
                         </div>
                       </div>
@@ -245,17 +245,17 @@ const TopIdeasPage = () => {
                         </div>
 
                         {/* Domain */}
-                        <div className="text-sm text-purple-400 mb-2 text-center">
+                        <div className="text-sm text-blue-600 mb-2 text-center">
                           {idea.domain}
                         </div>
 
                         {/* Title */}
-                        <h4 className="text-lg font-bold text-white mb-3 text-center">
+                        <h4 className="text-lg font-bold text-blue-900 mb-3 text-center">
                           {idea.title}
                         </h4>
 
                         {/* Description */}
-                        <p className="text-white/70 text-sm mb-4 line-clamp-3">
+                        <p className="text-blue-700 text-sm mb-4 line-clamp-3">
                           {idea.description}
                         </p>
 
@@ -264,7 +264,7 @@ const TopIdeasPage = () => {
                           {idea.tags?.slice(0, 3).map((tag, tagIndex) => (
                             <span
                               key={tagIndex}
-                              className="px-2 py-1 bg-white/10 rounded-full text-xs text-white/70"
+                              className="px-2 py-1 bg-blue-50 rounded-full text-xs text-blue-700"
                             >
                               {tag}
                             </span>
