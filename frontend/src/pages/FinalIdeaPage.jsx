@@ -262,10 +262,10 @@ const FinalIdeaPage = () => {
         <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
           <div className="card p-8 text-center max-w-md">
             <div className="w-16 h-16 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
-              <Save className="w-8 h-8 text-green-400" />
+              <Save className="w-8 h-8 text-green-600" />
             </div>
-            <h2 className="text-xl font-bold text-white mb-4">Idea Saved!</h2>
-            <p className="text-white/70 mb-6">
+            <h2 className="text-xl font-bold text-gray-900 mb-4">Idea Saved!</h2>
+            <p className="text-gray-700 mb-6">
               Your personalized startup idea has been saved to your profile.
             </p>
             <button
@@ -354,9 +354,9 @@ const FinalIdeaPage = () => {
               <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center">
                 <Sparkles className="w-5 h-5 text-white" />
               </div>
-              <h3 className="text-xl font-bold text-white">AI Analysis</h3>
+              <h3 className="text-xl font-bold text-gray-900">AI Analysis</h3>
             </div>
-            <p className="text-white/80 leading-relaxed">
+            <p className="text-gray-700 leading-relaxed">
               {finalIdea.aiReasoning}
             </p>
           </div>
@@ -369,18 +369,18 @@ const FinalIdeaPage = () => {
               <div className="w-10 h-10 bg-gradient-to-r from-green-500 to-teal-500 rounded-full flex items-center justify-center">
                 <Star className="w-5 h-5 text-white" />
               </div>
-              <h3 className="text-xl font-bold text-white">Key Features</h3>
+              <h3 className="text-xl font-bold text-gray-900">Key Features</h3>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {finalIdea.keyFeatures.map((feature, index) => (
                 <div
                   key={index}
-                  className="flex items-start space-x-3 p-3 bg-white/5 rounded-lg"
+                  className="flex items-start space-x-3 p-3 bg-blue-50 rounded-lg"
                 >
                   <div className="w-6 h-6 bg-gradient-to-r from-yellow-400 to-orange-400 rounded-full flex items-center justify-center mt-0.5">
                     <span className="text-xs">✨</span>
                   </div>
-                  <p className="text-white/80 text-sm">{feature}</p>
+                  <p className="text-gray-700 text-sm">{feature}</p>
                 </div>
               ))}
             </div>

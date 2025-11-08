@@ -104,8 +104,8 @@ const TopIdeasPage = () => {
           <div className="w-16 h-16 bg-red-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
             <span className="text-2xl">❌</span>
           </div>
-          <h2 className="text-xl font-bold text-white mb-4">Not Enough Ideas</h2>
-          <p className="text-white/70 mb-6">{error}</p>
+          <h2 className="text-xl font-bold text-gray-900 mb-4">Not Enough Ideas</h2>
+          <p className="text-gray-700 mb-6">{error}</p>
           <button
             onClick={() => navigate('/swipe')}
             className="btn-primary"
@@ -133,13 +133,13 @@ const TopIdeasPage = () => {
             transition={{ type: "spring", stiffness: 300 }}
           >
             <div className="w-16 h-16 bg-orange-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
-              <AlertTriangle className="w-8 h-8 text-orange-400" />
+              <AlertTriangle className="w-8 h-8 text-orange-600" />
             </div>
-            <h2 className="text-xl font-bold text-white mb-4">Select 3 Ideas</h2>
-            <p className="text-white/70 mb-2">
+            <h2 className="text-xl font-bold text-gray-900 mb-4">Select 3 Ideas</h2>
+            <p className="text-gray-700 mb-2">
               Please select exactly 3 ideas to continue.
             </p>
-            <p className="text-white/70 mb-6">
+            <p className="text-gray-700 mb-6">
               You currently have {selectedIdeas.length} selected. 
               {selectedIdeas.length < 3 ? ` You need ${3 - selectedIdeas.length} more.` : ' Please remove some selections.'}
             </p>
@@ -319,17 +319,17 @@ const TopIdeasPage = () => {
                         </div>
 
                         {/* Domain */}
-                        <div className="text-sm text-purple-400 mb-2">
+                        <div className="text-sm font-medium text-purple-700 mb-2">
                           {idea.domain}
                         </div>
 
                         {/* Title */}
-                        <h4 className="text-lg font-bold text-white mb-3">
+                        <h4 className="text-lg font-bold text-gray-900 mb-3">
                           {idea.title}
                         </h4>
 
                         {/* Description */}
-                        <p className="text-white/70 text-sm mb-4 line-clamp-3">
+                        <p className="text-gray-700 text-sm mb-4 line-clamp-3">
                           {idea.description}
                         </p>
 
@@ -338,7 +338,7 @@ const TopIdeasPage = () => {
                           {idea.tags?.slice(0, 3).map((tag, tagIndex) => (
                             <span
                               key={tagIndex}
-                              className="px-2 py-1 bg-white/10 rounded-full text-xs text-white/70"
+                              className="px-2 py-1 bg-purple-50 rounded-full text-xs text-purple-700 font-medium"
                             >
                               {tag}
                             </span>
@@ -347,10 +347,10 @@ const TopIdeasPage = () => {
 
                         {/* Select button indicator */}
                         <div className="text-center">
-                          <div className="inline-flex items-center space-x-2 text-purple-400 group-hover:text-purple-300">
+                          <div className="inline-flex items-center space-x-2 text-purple-600 group-hover:text-purple-700 font-medium">
                             <span className="text-sm">Add to top 3</span>
-                            <div className="w-6 h-6 border-2 border-current rounded-full flex items-center justify-center">
-                              <span className="text-xs">+</span>
+                            <div className="w-6 h-6 border-2 border-purple-600 rounded-full flex items-center justify-center group-hover:border-purple-700 group-hover:bg-purple-50 transition-colors">
+                              <span className="text-xs font-bold">+</span>
                             </div>
                           </div>
                         </div>
