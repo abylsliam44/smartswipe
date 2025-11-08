@@ -157,8 +157,8 @@ const ProfileDomainsPage = () => {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
-          <Loader2 className="w-8 h-8 animate-spin text-purple-400 mx-auto mb-4" />
-          <p className="text-white/70">Loading domains...</p>
+          <Loader2 className="w-8 h-8 animate-spin text-purple-600 mx-auto mb-4" />
+          <p className="text-gray-700">Loading domains...</p>
         </div>
       </div>
     )

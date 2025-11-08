@@ -47,8 +47,8 @@ const ResultsPage = () => {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
-          <h2 className="text-2xl font-bold text-white mb-4">No Liked Ideas</h2>
-          <p className="text-white/70 mb-6">You haven't liked any ideas yet.</p>
+          <h2 className="text-2xl font-bold text-blue-900 mb-4">No Liked Ideas</h2>
+          <p className="text-blue-700 mb-6">You haven't liked any ideas yet.</p>
           <button onClick={handleNewCycle} className="btn-primary">
             Start Swiping
           </button>
@@ -67,8 +67,8 @@ const ResultsPage = () => {
         transition={{ duration: 0.6 }}
       >
         <div className="text-center">
-          <h1 className="text-3xl font-bold text-white mb-2">Your Favorite Ideas</h1>
-          <p className="text-white/70">Select up to 5 ideas for personalized recommendations</p>
+          <h1 className="text-3xl font-bold text-blue-900 mb-2">Your Favorite Ideas</h1>
+          <p className="text-blue-700">Select up to 5 ideas for personalized recommendations</p>
         </div>
       </motion.header>
 
@@ -88,7 +88,7 @@ const ResultsPage = () => {
                 style={{ width: `${(selectedIdeas.length / 5) * 100}%` }}
               />
             </div>
-            <p className="text-white/70">
+            <p className="text-blue-700">
               Selected: {selectedIdeas.length} of 5 ideas
             </p>
           </div>
@@ -112,17 +112,17 @@ const ResultsPage = () => {
               >
                 <div className="p-6">
                   {/* Domain */}
-                  <div className="text-sm text-purple-400 mb-3">
+                  <div className="text-sm font-medium text-purple-700 mb-3">
                     {idea.domain}
                   </div>
 
                   {/* Title */}
-                  <h3 className="text-lg font-bold text-white mb-3">
+                  <h3 className="text-lg font-bold text-gray-900 mb-3">
                     {idea.title}
                   </h3>
 
                   {/* Description */}
-                  <p className="text-white/70 text-sm mb-4 line-clamp-3">
+                  <p className="text-gray-700 text-sm mb-4 line-clamp-3">
                     {idea.description}
                   </p>
 
@@ -131,7 +131,7 @@ const ResultsPage = () => {
                     {idea.tags?.map((tag, tagIndex) => (
                       <span
                         key={tagIndex}
-                        className="px-2 py-1 bg-white/10 rounded-full text-xs text-white/70"
+                        className="px-2 py-1 bg-purple-50 rounded-full text-xs text-purple-700 font-medium"
                       >
                         {tag}
                       </span>
@@ -179,7 +179,7 @@ const ResultsPage = () => {
           </motion.div>
 
           {selectedIdeas.length === 0 && (
-            <p className="text-white/60 text-sm text-center mt-4">
+            <p className="text-gray-600 text-sm text-center mt-4">
               Please select at least one idea to continue
             </p>
           )}

@@ -164,13 +164,13 @@ const TopIdeasPage = () => {
           <div className="flex items-center space-x-4">
             <button
               onClick={() => navigate('/results')}
-              className="text-white/60 hover:text-white/80 transition-colors"
+              className="text-blue-600 hover:text-blue-800 transition-colors"
             >
               <ArrowLeft className="w-6 h-6" />
             </button>
             <div>
-              <h1 className="text-3xl font-bold text-white">Choose Your Top 3</h1>
-              <p className="text-white/70">Select the 3 most promising ideas</p>
+              <h1 className="text-3xl font-bold text-blue-900">Choose Your Top 3</h1>
+              <p className="text-blue-700">Select the 3 most promising ideas</p>
             </div>
           </div>
         </div>
@@ -192,7 +192,7 @@ const TopIdeasPage = () => {
                 style={{ width: `${(selectedIdeas.length / 3) * 100}%` }}
               />
             </div>
-            <p className="text-white/70">
+            <p className="text-blue-700">
               Selected: {selectedIdeas.length} of 3 ideas
             </p>
           </div>
@@ -293,8 +293,8 @@ const TopIdeasPage = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: selectedIdeas.length > 0 ? 0.6 : 0.3 }}
             >
-              <h2 className="text-2xl font-bold text-white mb-6 flex items-center">
-                <Sparkles className="w-6 h-6 text-blue-400 mr-3" />
+              <h2 className="text-2xl font-bold text-blue-900 mb-6 flex items-center">
+                <Sparkles className="w-6 h-6 text-blue-600 mr-3" />
                 Choose from Your Liked Ideas ({likedIdeas.length} available)
               </h2>
               
@@ -378,7 +378,7 @@ const TopIdeasPage = () => {
             </button>
             
             {selectedIdeas.length < 3 && (
-              <p className="text-white/60 text-sm mt-4">
+              <p className="text-gray-600 text-sm mt-4">
                 Please select exactly 3 ideas to continue ({3 - selectedIdeas.length} more needed)
               </p>
             )}
@@ -392,8 +392,8 @@ const TopIdeasPage = () => {
             transition={{ delay: 0.9 }}
           >
             <div className="card p-6 max-w-2xl mx-auto">
-              <h3 className="text-lg font-bold text-white mb-3">How It Works</h3>
-              <p className="text-white/70 text-sm">
+              <h3 className="text-lg font-bold text-blue-900 mb-3">How It Works</h3>
+              <p className="text-blue-700 text-sm">
                 Select your 3 most promising ideas. They will be ranked with gold, silver, and bronze medals. 
                 Next, you'll answer some questions to help our AI create the perfect personalized startup idea for you!
               </p>

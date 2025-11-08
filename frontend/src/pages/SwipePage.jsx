@@ -248,8 +248,8 @@ const SwipePage = () => {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
-          <Loader2 className="w-8 h-8 animate-spin text-purple-400 mx-auto mb-4" />
-          <p className="text-white/70">Loading ideas...</p>
+          <Loader2 className="w-8 h-8 animate-spin text-purple-600 mx-auto mb-4" />
+          <p className="text-gray-700">Loading ideas...</p>
         </div>
       </div>
     )
@@ -267,8 +267,8 @@ const SwipePage = () => {
           <div className="w-16 h-16 bg-red-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
             <span className="text-2xl">❌</span>
           </div>
-          <h2 className="text-xl font-bold text-white mb-4">Oops!</h2>
-          <p className="text-white/70 mb-6">{error}</p>
+          <h2 className="text-xl font-bold text-gray-900 mb-4">Oops!</h2>
+          <p className="text-gray-700 mb-6">{error}</p>
           <div className="flex gap-4">
             <button
               onClick={generateNewIdeas}
@@ -438,22 +438,22 @@ const SwipePage = () => {
           <div className="flex items-center space-x-4">
             <button
               onClick={handleBackToHome}
-              className="text-white/60 hover:text-white/80 transition-colors"
+              className="text-blue-600 hover:text-blue-800 transition-colors"
             >
               <ArrowLeft className="w-6 h-6" />
             </button>
             <div>
-              <h1 className="text-2xl font-bold text-white">Discover Ideas</h1>
-              <p className="text-white/70 text-sm">Swipe right to like, left to pass</p>
+              <h1 className="text-2xl font-bold text-blue-900">Discover Ideas</h1>
+              <p className="text-blue-700 text-sm">Swipe right to like, left to pass</p>
             </div>
           </div>
           
           {/* Stats */}
           <div className="text-right">
-            <p className="text-white/70 text-sm">
+            <p className="text-blue-700 text-sm">
               Swiped: {totalSwiped} | Liked: {likedIdeas.length}
             </p>
-            <p className="text-white/60 text-xs">
+            <p className="text-blue-600 text-xs">
               Progress: {totalSwiped % 10}/10 until next checkpoint
             </p>
           </div>
@@ -526,7 +526,7 @@ const SwipePage = () => {
                   <div className={`w-16 h-16 bg-gradient-to-r ${getDomainColor(ideas[currentIndex + 1].domain)} rounded-xl flex items-center justify-center mx-auto mb-4 text-2xl`}>
                     {getDomainIcon(ideas[currentIndex + 1].domain)}
                   </div>
-                  <h3 className="text-lg font-bold text-white">
+                  <h3 className="text-lg font-bold text-gray-700">
                     {ideas[currentIndex + 1].title}
                   </h3>
                 </div>
@@ -560,7 +560,7 @@ const SwipePage = () => {
 
           {/* Instructions */}
           <motion.p 
-            className="text-center text-white/60 text-sm mt-6"
+            className="text-center text-gray-600 text-sm mt-6"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.8 }}

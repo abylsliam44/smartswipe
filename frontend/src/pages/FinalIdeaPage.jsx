@@ -207,7 +207,7 @@ const FinalIdeaPage = () => {
           >
             <Sparkles className="w-8 h-8 text-white" />
           </motion.div>
-          <p className="text-white/70">AI is crafting your perfect startup idea...</p>
+          <p className="text-gray-700">AI is crafting your perfect startup idea...</p>
         </div>
       </div>
     )
@@ -224,7 +224,7 @@ const FinalIdeaPage = () => {
           >
             <Sparkles className="w-8 h-8 text-white" />
           </motion.div>
-          <p className="text-white/70">AI is crafting your perfect startup idea...</p>
+          <p className="text-gray-700">AI is crafting your perfect startup idea...</p>
         </div>
       </div>
     )
@@ -282,11 +282,11 @@ const FinalIdeaPage = () => {
       <header className="container mx-auto px-6 py-6">
         <div className="text-center">
           <div className="flex items-center justify-center space-x-2 mb-2">
-            <Trophy className="w-8 h-8 text-yellow-400" />
-            <h1 className="text-3xl font-bold text-white">Your Perfect Startup Idea</h1>
-            <Trophy className="w-8 h-8 text-yellow-400" />
+            <Trophy className="w-8 h-8 text-yellow-500" />
+            <h1 className="text-3xl font-bold text-blue-900">Your Perfect Startup Idea</h1>
+            <Trophy className="w-8 h-8 text-yellow-500" />
           </div>
-          <p className="text-white/70">
+          <p className="text-blue-700">
             Crafted by AI based on your preferences
           </p>
         </div>
@@ -413,10 +413,10 @@ const FinalIdeaPage = () => {
           <div 
             className="text-center mt-8 card p-6"
           >
-            <p className="text-white/60 text-sm mb-2">
+            <p className="text-gray-700 text-sm mb-2">
               🎯 This idea was crafted from {topIdeas.length} top selections
             </p>
-            <p className="text-white/60 text-sm">
+            <p className="text-gray-700 text-sm">
               🚀 Market Potential: {finalIdea.marketPotential}
             </p>
           </div>
