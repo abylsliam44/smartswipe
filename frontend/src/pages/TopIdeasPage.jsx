@@ -58,9 +58,9 @@ const TopIdeasPage = () => {
 
   const getMedalInfo = (position) => {
     const medals = [
-      { icon: Trophy, color: 'text-yellow-400', bgColor: 'bg-yellow-500/20', name: 'Gold Medal' },
-      { icon: Medal, color: 'text-gray-300', bgColor: 'bg-gray-500/20', name: 'Silver Medal' },
-      { icon: Award, color: 'text-amber-600', bgColor: 'bg-amber-600/20', name: 'Bronze Medal' }
+      { icon: Trophy, color: 'text-yellow-600', bgColor: 'bg-yellow-500/20', borderColor: 'border-yellow-600', name: 'Gold Medal' },
+      { icon: Medal, color: 'text-gray-700', bgColor: 'bg-gray-500/20', borderColor: 'border-gray-700', name: 'Silver Medal' },
+      { icon: Award, color: 'text-amber-700', bgColor: 'bg-amber-600/20', borderColor: 'border-amber-700', name: 'Bronze Medal' }
     ]
     return medals[position] || medals[0]
   }
@@ -218,7 +218,7 @@ const TopIdeasPage = () => {
                   return (
                     <motion.div
                       key={idea.id}
-                    className={`card relative border-2 border-current ${medal.color}`}
+                    className={`card relative border-2 ${medal.borderColor}`}
                       initial={{ opacity: 0, y: 20, scale: 0.9 }}
                       animate={{ opacity: 1, y: 0, scale: 1 }}
                       transition={{ delay: 0.4 + index * 0.1, type: "spring" }}
@@ -226,7 +226,7 @@ const TopIdeasPage = () => {
                     >
                       {/* Medal */}
                       <div className="absolute -top-4 -right-4 z-10">
-                        <div className={`w-12 h-12 ${medal.bgColor} rounded-full flex items-center justify-center border-2 border-current ${medal.color}`}>
+                        <div className={`w-12 h-12 ${medal.bgColor} rounded-full flex items-center justify-center border-2 ${medal.borderColor}`}>
                           <MedalIcon className={`w-6 h-6 ${medal.color}`} />
                         </div>
                       </div>
@@ -245,7 +245,7 @@ const TopIdeasPage = () => {
                         </div>
 
                         {/* Domain */}
-                        <div className="text-sm text-blue-600 mb-2 text-center">
+                        <div className="text-sm font-semibold text-blue-700 mb-2 text-center">
                           {idea.domain}
                         </div>
 
@@ -274,7 +274,7 @@ const TopIdeasPage = () => {
                         {/* Remove button */}
                         <button
                           onClick={() => handleIdeaSelect(idea)}
-                          className="w-full py-2 text-sm text-red-400 hover:text-red-300 transition-colors"
+                          className="w-full py-2 text-sm text-red-600 hover:text-red-700 font-medium transition-colors"
                         >
                           Remove from top 3
                         </button>
@@ -319,7 +319,7 @@ const TopIdeasPage = () => {
                         </div>
 
                         {/* Domain */}
-                        <div className="text-sm font-medium text-purple-700 mb-2">
+                        <div className="text-sm font-semibold text-purple-800 mb-2">
                           {idea.domain}
                         </div>
 
@@ -347,10 +347,10 @@ const TopIdeasPage = () => {
 
                         {/* Select button indicator */}
                         <div className="text-center">
-                          <div className="inline-flex items-center space-x-2 text-purple-600 group-hover:text-purple-700 font-medium">
+                          <div className="inline-flex items-center space-x-2 text-purple-700 group-hover:text-purple-800 font-semibold">
                             <span className="text-sm">Add to top 3</span>
-                            <div className="w-6 h-6 border-2 border-purple-600 rounded-full flex items-center justify-center group-hover:border-purple-700 group-hover:bg-purple-50 transition-colors">
-                              <span className="text-xs font-bold">+</span>
+                            <div className="w-6 h-6 border-2 border-purple-700 rounded-full flex items-center justify-center group-hover:border-purple-800 group-hover:bg-purple-100 transition-colors">
+                              <span className="text-xs font-bold text-purple-800">+</span>
                             </div>
                           </div>
                         </div>

@@ -112,7 +112,7 @@ const ResultsPage = () => {
               >
                 <div className="p-6">
                   {/* Domain */}
-                  <div className="text-sm font-medium text-purple-700 mb-3">
+                  <div className="text-sm font-semibold text-purple-800 mb-3">
                     {idea.domain}
                   </div>
 
@@ -146,7 +146,7 @@ const ResultsPage = () => {
                       transition={{ type: "spring", stiffness: 500, damping: 30 }}
                       className="flex items-center justify-center"
                     >
-                      <CheckCircle className="w-6 h-6 text-purple-400" />
+                      <CheckCircle className="w-6 h-6 text-purple-600" />
                     </motion.div>
                   )}
                 </div>
